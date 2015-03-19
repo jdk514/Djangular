@@ -15,6 +15,6 @@
 *.sqlite3*
 *.sass-cache
 
-
+venv
 /node_modules
 npm-debug.log

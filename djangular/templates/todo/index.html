@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+ng-app="todoApp"
+{% endblock %}
+{% block header %}
+Todo
+{% endblock %}
+
+{% block content %}
+<div ui-view></div>
+
+<script type="text/ng-template" id="taskList">
+    <table class="table table-hover">
+    	<tr ng-hide="task.completed" ng-repeat="task in tasks">
+    		<td>[[task.task]] | Due: [[task.due_date]] <button ng-click="task.complete()">Complete</button></td>
+        </tr>
+    </table>
+</script>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ STATIC_URL }}js/angular.js"></script>
+<script src="{{ STATIC_URL }}js/angular-ui-router.min.js"></script>
+<script src="{{ STATIC_URL}}js/todoapp.js"></script>
+<script src="{{ STATIC_URL}}js/todocontrollers.js"></script>
+<script src="{{ STATIC_URL}}js/todoservices.js"></script>
+{% endblock %}
