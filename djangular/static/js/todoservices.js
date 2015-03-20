@@ -69,26 +69,6 @@
         });
       };
 
-      Task.prototype.add_task = function(data) {
-        var _this = this;
-        data = {
-          'task': data.task,
-          'priority': data.priority,
-          'due_date': data.due_date,
-          'completed': false
-        };
-        return $http({
-          method: 'PUT',
-          url: '/todo/tasks/' + due_date + '/',
-          data: data
-        }).success(function(data) {
-          return $log.info("Added Task");
-        }).error(function(data) {
-          $log.info(data);
-          return $log.info("Failed to add Task");
-        });
-      };
-
       return Task;
 
     })();

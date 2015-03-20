@@ -41,15 +41,6 @@ services.factory('Task', ($http, $log) ->
             .error (data) =>
                 $log.info("Failed to Complete")
 
-        add_task : (data) ->
-            data = {'task' : data.task, 'priority' : data.priority, 'due_date' : data.due_date, 'completed' : false}
-            $http({method: 'PUT', url: '/todo/tasks/' + due_date + '/', data:data})
-            .success (data) =>  
-                $log.info("Added Task")
-            .error (data) =>
-                $log.info(data)
-                $log.info("Failed to add Task")
-
     return Task
 )
 
