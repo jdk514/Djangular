@@ -25,7 +25,7 @@
         real_month = new_date.getMonth() + 1;
         this.task = data.task;
         this.id = data.id;
-        this.completed = data.completed;
+        this.completed = !data.completed;
         this.due_date = new_date.getDate() + '/' + real_month + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes());
         this.priority = data.priority;
         if (today > new_date) {

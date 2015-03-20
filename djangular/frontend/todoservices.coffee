@@ -16,7 +16,7 @@ services.factory('Task', ($http, $log) ->
             real_month = new_date.getMonth() + 1
             @task = data.task
             @id = data.id
-            @completed = data.completed
+            @completed = !data.completed
             @due_date = new_date.getDate() + '/' + real_month + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
             @priority = data.priority
             if today > new_date 
