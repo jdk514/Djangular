@@ -23,7 +23,7 @@ APP_DIR = Path(__file__).ancestor(2)
 SECRET_KEY = 'q%1_7^r9@jzu**v2g0fb66yr&zch9)6h%&*y(gm3c97nnyv76j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
