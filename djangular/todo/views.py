@@ -13,6 +13,10 @@ class TaskList(generics.ListCreateAPIView):
         permissions.AllowAny
     ]
 
+    def get_queryset(self):
+    	tasks = Task.objects.all().order_by('due_date')
+    	return tasks
+
 class TaskDateList(generics.ListCreateAPIView):
 	model = Task
 	serializer_class = TaskSerializer
@@ -53,7 +57,7 @@ class MeetingList(generics.ListCreateAPIView):
 		today = datetime.today()
 		start_date = datetime(today.year, today.month, today.day, 23, 59, 59) - timedelta(days=2)
 		end_date = datetime(today.year, today.month, today.day, 23, 59, 59) + timedelta(days=6)
-		meetings = Meeting.objects.filter(date__range = [start_date, end_date])
+		meetings = Meeting.objects.filter(date__range = [start_date, end_date]).order_by('date')
 		return meetings
 
 def index(request):

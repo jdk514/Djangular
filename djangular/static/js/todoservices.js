@@ -126,6 +126,7 @@
           return val;
         };
         new_date = new Date(data.date);
+        new_date.setMonth(new_date.getMonth() + 1);
         this.meeting = data.meeting;
         this.id = data.id;
         return this.date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes());

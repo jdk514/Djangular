@@ -77,6 +77,7 @@ services.factory('Meeting', ($http, $log) ->
                 return val
 
             new_date = new Date(data.date)
+            new_date.setMonth(new_date.getMonth() + 1)
             @meeting = data.meeting
             @id = data.id
             @date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
