@@ -10,7 +10,7 @@ services.factory('Choice', ($http, $log)->
 
         update : ->
             data = {'votes' : @votes, 'choice_text' : @choice_text}
-            $http({method: 'PUT', url: '/polls/choices/' + @id + '/', data:data})
+            $http({method: 'PATCH', url: '/polls/choices/' + @id + '/', data:data})
             .success (data) =>
                 $log.info("Succesfully voted")
             .error (data) =>

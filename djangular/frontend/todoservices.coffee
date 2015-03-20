@@ -14,6 +14,7 @@ services.factory('Task', ($http, $log) ->
             today = new Date()
             new_date = new Date(data.due_date)
             real_month = new_date.getMonth() + 1
+            @datetime = data.due_date
             @task = data.task
             @id = data.id
             @completed = !data.completed
@@ -33,12 +34,21 @@ services.factory('Task', ($http, $log) ->
                 $log.info("Failed to fetch task.")
 
         complete : ->
-            data = {'completed' : true, 'task' : @task, 'due_date' : @due_date, 'priority' : @priority}
+            data = {'task' : @task, 'priority' : @priority, 'due_date' : @datetime, 'completed' : true}
             $http({method: 'PUT', url: '/todo/tasks/' + @id + '/', data:data})
             .success (data) =>  
                 $log.info("Task Completed")
             .error (data) =>
                 $log.info("Failed to Complete")
+
+        add_task : (data) ->
+            data = {'task' : data.task, 'priority' : data.priority, 'due_date' : data.due_date, 'completed' : false}
+            $http({method: 'PUT', url: '/todo/tasks/' + due_date + '/', data:data})
+            .success (data) =>  
+                $log.info("Added Task")
+            .error (data) =>
+                $log.info(data)
+                $log.info("Failed to add Task")
 
     return Task
 )

@@ -20,7 +20,7 @@
           'choice_text': this.choice_text
         };
         return $http({
-          method: 'PUT',
+          method: 'PATCH',
           url: '/polls/choices/' + this.id + '/',
           data: data
         }).success(function(data) {

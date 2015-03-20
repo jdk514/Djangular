@@ -23,6 +23,7 @@
         today = new Date();
         new_date = new Date(data.due_date);
         real_month = new_date.getMonth() + 1;
+        this.datetime = data.due_date;
         this.task = data.task;
         this.id = data.id;
         this.completed = !data.completed;
@@ -52,10 +53,10 @@
         var data,
           _this = this;
         data = {
-          'completed': true,
           'task': this.task,
-          'due_date': this.due_date,
-          'priority': this.priority
+          'priority': this.priority,
+          'due_date': this.datetime,
+          'completed': true
         };
         return $http({
           method: 'PUT',
@@ -65,6 +66,26 @@
           return $log.info("Task Completed");
         }).error(function(data) {
           return $log.info("Failed to Complete");
+        });
+      };
+
+      Task.prototype.add_task = function(data) {
+        var _this = this;
+        data = {
+          'task': data.task,
+          'priority': data.priority,
+          'due_date': data.due_date,
+          'completed': false
+        };
+        return $http({
+          method: 'PUT',
+          url: '/todo/tasks/' + due_date + '/',
+          data: data
+        }).success(function(data) {
+          return $log.info("Added Task");
+        }).error(function(data) {
+          $log.info(data);
+          return $log.info("Failed to add Task");
         });
       };
 

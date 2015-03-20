@@ -37,7 +37,7 @@ Task Tracker
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tr ng-show="task.completed" ng-repeat="task in tasks">
-                            <td class="[[task.overdue]]"><div class="pull-left">[[task.task]] | Due: [[task.due_date]]</div> <div class="pull-right"><button ng-click="task.complete()">Complete</button></div></td>
+                            <td class="[[task.overdue]]"><div class="pull-left">[[task.task]] | Due: [[task.due_date]]</div> <div class="pull-right"><button ng-click="task.complete(); remove(task)">Complete</button></div></td>
                         </tr>
                     </table>
                 </div>

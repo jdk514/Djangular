@@ -5,7 +5,13 @@
 
   controllers.controller('taskListController', function($scope, $state, $log, tasks, meetings) {
     $scope.tasks = tasks.all;
-    return $scope.meetings = meetings.all;
+    $scope.meetings = meetings.all;
+    return $scope.remove = function(task) {
+      var index;
+      index = $scope.tasks.indexOf(task);
+      $scope.tasks.splice(index, 1);
+      return $log.info("Completed Task Removed");
+    };
   });
 
   controllers.controller('taskDetailController', function($scope, $state, $log, task) {
