@@ -28,7 +28,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
+ 
 # Application definition
 
 INSTALLED_APPS = (
@@ -85,10 +85,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
-    APP_DIR.child('static'),
+    os.path.join(APP_DIR, 'static'),
 )
+
+
+import dj_database_url
+import os
+if os.getcwd() == "/app":
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
