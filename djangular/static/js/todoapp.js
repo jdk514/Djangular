@@ -22,7 +22,7 @@
       templateUrl: 'taskDetail',
       controller: 'taskDetailController',
       resolve: {
-        task: function($stateParams, $log, Question) {
+        task: function($stateParams, $log, Task) {
           var task;
           task = new Task(null);
           task.get($stateParams.taskId);

@@ -2,8 +2,7 @@ from rest_framework import generics, permissions
 from .models import Task, Meeting
 from .serializers import TaskSerializer, MeetingSerializer
 from django.shortcuts import render
-from datetime import datetime
-import pdb
+from datetime import datetime, timedelta
 
 
 class TaskList(generics.ListCreateAPIView):
@@ -44,11 +43,18 @@ class MeetingDetail(generics.UpdateAPIView):
 	]
 
 class MeetingList(generics.ListCreateAPIView):
-    model = Meeting
-    serializer_class = MeetingSerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
+	model = Meeting
+	serializer_class = MeetingSerializer
+	permission_classes = [
+		permissions.AllowAny
+	]
+	def get_queryset(self):
+		today = datetime.today()
+		start_date = datetime(today.year, today.month, today.day, 23, 59, 59) - timedelta(days=2)
+		end_date = datetime(today.year, today.month, today.day, 23, 59, 59) + timedelta(days=7)
+		meetings = Meeting.objects.filter(date__range = [start_date, end_date])
+		return meetings
+
 
 def index(request):
     return render(request, 'todo/index.html')
