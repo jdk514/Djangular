@@ -3,26 +3,49 @@
 ng-app="todoApp"
 {% endblock %}
 {% block header %}
-Todo
+Task Tracker
 {% endblock %}
 
 {% block content %}
 <div ui-view></div>
 
 <script type="text/ng-template" id="taskList">
-    <table class="table table-hover">
-    	<tr ng-hide="task.completed" ng-repeat="task in tasks">
-    		<td>[[task.task]] | Due: [[task.due_date]] <button ng-click="task.complete()">Complete</button></td>
-        </tr>
-    </table>
-    <table class="table table-hover">
-    	<tr ng-repeat="meeting in meetings">
-    		<td>[[meeting]]</td>
-        </tr>
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Upcoming Meetings</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                    	<tr ng-repeat="meeting in meetings">
+                    		<td>
+                                <div class="pull-left">[[meeting.meeting]]</div>
+                                <div class="pull-right">[[meeting.date]]</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"> 
+                    <h3>Tasks</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr ng-show="task.completed" ng-repeat="task in tasks">
+                            <td class="[[task.overdue]]"><div class="pull-left">[[task.task]] | Due: [[task.due_date]]</div> <div class="pull-right"><button ng-click="task.complete()">Complete</button></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 </script>
-
-Meetings
 
 <script type="text/ng-template" id="meetingList">
 </script>

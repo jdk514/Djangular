@@ -13,19 +13,26 @@
       }
 
       Task.prototype.init = function(data) {
-        var forceTwoDigits, new_date;
+        var forceTwoDigits, new_date, real_month, today;
         forceTwoDigits = function(val) {
           if (val < 10) {
             return "0" + val;
           }
           return val;
         };
+        today = new Date();
         new_date = new Date(data.due_date);
+        real_month = new_date.getMonth() + 1;
         this.task = data.task;
         this.id = data.id;
-        this.completed = !data.completed;
-        this.due_date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes());
-        return this.priority = data.priority;
+        this.completed = data.completed;
+        this.due_date = new_date.getDate() + '/' + real_month + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes());
+        this.priority = data.priority;
+        if (today > new_date) {
+          return this.overdue = "alert alert-danger";
+        } else {
+          return this.overdue = "";
+        }
       };
 
       Task.prototype.get = function(taskId) {
@@ -45,7 +52,7 @@
         var data,
           _this = this;
         data = {
-          'completed': this.completed,
+          'completed': true,
           'task': this.task,
           'due_date': this.due_date,
           'priority': this.priority
@@ -118,7 +125,7 @@
           }
           return val;
         };
-        new_date = new Date(data.due_date);
+        new_date = new Date(data.date);
         this.meeting = data.meeting;
         this.id = data.id;
         return this.date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes());

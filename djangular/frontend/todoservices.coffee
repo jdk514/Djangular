@@ -11,12 +11,18 @@ services.factory('Task', ($http, $log) ->
                     return "0#{val}"
                 return val
 
+            today = new Date()
             new_date = new Date(data.due_date)
+            real_month = new_date.getMonth() + 1
             @task = data.task
             @id = data.id
-            @completed = !data.completed
-            @due_date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
+            @completed = data.completed
+            @due_date = new_date.getDate() + '/' + real_month + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
             @priority = data.priority
+            if today > new_date 
+                @overdue = "alert alert-danger"
+            else
+                @overdue = ""
 
         get : (taskId) ->
             $http({method: 'GET', url: '/todo/tasks/' + taskId + '/'})
@@ -27,7 +33,7 @@ services.factory('Task', ($http, $log) ->
                 $log.info("Failed to fetch task.")
 
         complete : ->
-            data = {'completed' : @completed, 'task' : @task, 'due_date' : @due_date, 'priority' : @priority}
+            data = {'completed' : true, 'task' : @task, 'due_date' : @due_date, 'priority' : @priority}
             $http({method: 'PUT', url: '/todo/tasks/' + @id + '/', data:data})
             .success (data) =>  
                 $log.info("Task Completed")
@@ -70,7 +76,7 @@ services.factory('Meeting', ($http, $log) ->
                     return "0#{val}"
                 return val
 
-            new_date = new Date(data.due_date)
+            new_date = new Date(data.date)
             @meeting = data.meeting
             @id = data.id
             @date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
