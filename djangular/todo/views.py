@@ -59,7 +59,7 @@ class MeetingList(generics.ListCreateAPIView):
 	#Only want to pull in the meetings within this week, and ordered
 	def get_queryset(self):
 		today = datetime.today()
-		start_date = datetime(today.year, today.month, today.day, 23, 59, 59) - timedelta(days=2)
+		start_date = datetime(today.year, today.month, today.day, 23, 59, 59) - timedelta(days=1)
 		end_date = datetime(today.year, today.month, today.day, 23, 59, 59) + timedelta(days=6)
 		meetings = Meeting.objects.filter(date__range = [start_date, end_date]).order_by('date')
 		return meetings
