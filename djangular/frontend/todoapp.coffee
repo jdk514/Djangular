@@ -17,6 +17,9 @@ app.config(($interpolateProvider, $stateProvider, $urlRouterProvider) ->
                 tasks : (Tasks)->
                     Tasks.fetch()
                     return Tasks.data()
+                meetings : (Meetings)->
+                    Meetings.fetch()
+                    return Meetings.data()
         )
         .state('taskDetail'
             url: '/{taskId:[0-9]+}/'
@@ -28,25 +31,25 @@ app.config(($interpolateProvider, $stateProvider, $urlRouterProvider) ->
                     task.get($stateParams.taskId)
                     return task
         )
+        .state('meetingDetail'
+            url: '/{meetingId:[0-9]+}/'
+            templateUrl: 'meetingDetail'
+            controller: 'meetingDetailController'
+            resolve:
+                meeting : ($stateParams, $log, Meeting)->
+                    meeting = new Meeting(null)
+                    meeting.get($stateParams.meetingId)
+                    return meeting
+        )        
 #       .state('meetingList'
-#           url: '/'
+#           url: '/fsdaf'
 #           templateUrl: 'meetingList'
 #           controller: 'meetingListController'
 #           resolve:
 #               meetings : (Meetings)->
 #                   Meetings.fetch()
 #                   return Meetings.data()
-#       )
-#       .state('meetingDetail'
-#           url: '/{meetingId:[0-9]+}/'
-#           templateUrl: 'meetingDetail'
-#           controller: 'meetingDetailController'
-#           resolve:
-#               meeting : ($stateParams, $log, Question)->
-#                   meeting = new Meeting(null)
-#                   meeting.get($stateParams.meetingId)
-#                   return meeting
-#		)        
+#        )     
 )
 
 app.config(($httpProvider) ->
