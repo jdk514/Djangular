@@ -1,10 +1,18 @@
-Djangular
+Djangular-Todo
 =================
-Talk/Slides: [http://mattcamilli.com/talks/djangular/#/](http://mattcamilli.com/talks/djangular/#/)
 
-Installing virtualenv:
-[http://docs.python-guide.org/en/latest/dev/virtualenvs/](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+###This Application is a simple task tracker using TrackMaven's Djangular application
 
-Installing grunt:
-[http://gruntjs.com/installing-grunt](http://gruntjs.com/installing-grunt)
+**Base URL /todo/**
 
+###Tasks
+From the main todo landing page users are able to view their tasks
+ * Users can define new tasks
+ * Overdue tasks are highlted
+ * Tasks are oredered by date
+ * Each task can be marked complete from the landing page using the "complete" button
+
+###Meetings
+From the todo landing page users are able to view the Meetings for the next week (7 days)
+ * Users can define new meetings
+ * Meetings are ordered by date
