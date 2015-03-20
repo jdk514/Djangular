@@ -59,4 +59,70 @@ services.factory('Tasks', ($log, $http, Task) ->
         return tasks
 )
 
+services.factory('Meeting', ($http, $log) ->
+    class Meeting
+        constructor : (data) ->
+            if data != null
+                @init(data)
+        init : (data) ->
+            forceTwoDigits = (val) ->
+                if val < 10
+                    return "0#{val}"
+                return val
 
+            new_date = new Date(data.due_date)
+            @meeting = data.meeting
+            @id = data.id
+            @date = new_date.getDate() + '/' + new_date.getMonth() + '/' + new_date.getFullYear() + ' at ' + forceTwoDigits(new_date.getHours()) + ':' + forceTwoDigits(new_date.getMinutes())
+
+        get : (meetingId) ->
+            $http({method: 'GET', url: '/todo/meetings/' + meetingId + '/'})
+            .success (data) =>
+                @init(data)
+                $log.info("Succesfully fetched meeting")
+            .error (data) =>
+                $log.info("Failed to fetch meeting.")
+
+        complete : ->
+            data = {'meeting' : @meeting, 'due_date' : @date}
+            $http({method: 'PUT', url: '/todo/meetings/' + @id + '/', data:data})
+            .success (data) =>  
+                $log.info("Meeting Completed")
+            .error (data) =>
+                $log.info("Failed to Complete")
+
+    return Meeting
+)
+
+services.factory('Meetings', ($log, $http, Meeting) ->
+    meetings = {
+        all : []
+    }
+
+    fromServer: (data) ->
+        meetings['all'].length = 0
+        for meeting in data 
+            meetings['all'].push(new Meeting(meeting))
+
+    fetch: ->
+        forceTwoDigits = (val) ->
+            if val < 10
+                return "0#{val}"
+            return val
+        today = new Date();
+        dd = forceTwoDigits(today.getDate());
+        mm = forceTwoDigits(today.getMonth()+1); #January is 0!
+        yyyy = today.getFullYear();
+        base_url = '/todo/meetings/' + yyyy + '/' + mm + '/' + dd + '/';
+        #get_url = base.concat(yyyy, '/', mm, '/', dd, '/')
+        $http({method: 'GET', url: base_url})
+            .success (data) =>
+                @fromServer(data)
+                $log.info("Succesfully fetched meetings for range.")
+            .error (data) =>
+                $log.info(base_url)
+                $log.info("Failed to fetch meetings for range.")
+
+    data : ->
+        return meetings
+)

@@ -15,6 +15,16 @@ Todo
     		<td>[[task.task]] | Due: [[task.due_date]] <button ng-click="task.complete()">Complete</button></td>
         </tr>
     </table>
+    <table class="table table-hover">
+    	<tr ng-repeat="meeting in meetings">
+    		<td>[[meeting]]</td>
+        </tr>
+    </table>
+</script>
+
+Meetings
+
+<script type="text/ng-template" id="meetingList">
 </script>
 {% endblock %}
 
