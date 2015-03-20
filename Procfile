@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath djangular config.wsgi --log-file - 
+web: gunicorn --pythonpath djangular config.wsgi
