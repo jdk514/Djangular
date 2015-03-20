@@ -14,6 +14,6 @@ class Meeting(models.Model):
 	meeting = models.CharField(max_length=200)
 	date = models.DateTimeField('date')
 
-	def __unicode__(self):
+	def __unicode__(self): 
 		return self.meeting
 
