@@ -23,7 +23,6 @@
         'due_date': date,
         'completed': false
       };
-      $log.info($scope);
       return $http({
         method: 'PUT',
         url: '/todo/tasks/' + int_date + '/',
