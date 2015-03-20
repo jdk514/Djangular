@@ -33,6 +33,7 @@ services.factory('Task', ($http, $log) ->
             .error (data) =>
                 $log.info("Failed to fetch task.")
 
+        # Simple logic to update a task to completed
         complete : ->
             data = {'task' : @task, 'priority' : @priority, 'due_date' : @datetime, 'completed' : true}
             $http({method: 'PUT', url: '/todo/tasks/' + @id + '/', data:data})

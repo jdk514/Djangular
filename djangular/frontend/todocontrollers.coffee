@@ -1,7 +1,9 @@
 controllers = angular.module('todoApp.controllers', [])
 
+#Rename Controller, no longer exclusive to Tasks
 controllers.controller('taskListController', ($scope, $state, $log, $http, tasks, meetings) ->
 	$scope.tasks = tasks.all
+	# Included meetings in this controller to simply controllers/services
 	$scope.meetings = meetings.all
 
 	$scope.remove = (task) ->
@@ -9,6 +11,7 @@ controllers.controller('taskListController', ($scope, $state, $log, $http, tasks
 		$scope.tasks.splice(index, 1);
 		$log.info("Completed Task Removed")
 	
+	# Logic to add new tasks
 	$scope.add_task = ->
 		date = new Date($scope.$parent.due_date)
 		#Use the current time to set the id - should be unique
@@ -20,6 +23,7 @@ controllers.controller('taskListController', ($scope, $state, $log, $http, tasks
 		.error (data) =>
 			$log.info("Failed to add Task")
 
+	# Logic to add new meetings
 	$scope.add_meeting = ->
 		date = new Date($scope.$parent.date)
 		#Use the current time to set the id - should be unique

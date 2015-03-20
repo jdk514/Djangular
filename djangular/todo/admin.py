@@ -1,7 +1,7 @@
 from django.contrib import admin
 from todo.models import Task, Meeting
 
-# Need to update these values still
+# Admin models for Meetings and Tasks
 class MeetingAdmin(admin.ModelAdmin):
 	fieldsets = [
 	(None, {'fields' : ['meeting']}),

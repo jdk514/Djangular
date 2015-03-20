@@ -93,7 +93,7 @@ STATICFILES_DIRS = (
     os.path.join(APP_DIR, 'static'),
 )
 
-
+# This segment necessary for Heroku deployment
 import dj_database_url
 import os
 if os.getcwd() == "/app":

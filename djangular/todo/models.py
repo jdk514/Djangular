@@ -2,6 +2,7 @@ from django.db import models
 
 class Task(models.Model):
 	task = models.CharField(max_length=200)
+	# Field created for future use
 	priority = models.IntegerField(default=0)
 	due_date = models.DateTimeField('date due')
 	completed = models.BooleanField(default=False)

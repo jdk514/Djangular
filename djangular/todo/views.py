@@ -13,6 +13,7 @@ class TaskList(generics.ListCreateAPIView):
         permissions.AllowAny
     ]
 
+    # Want Tasks ordered by the date they are due
     def get_queryset(self):
     	tasks = Task.objects.all().order_by('due_date')
     	return tasks
@@ -24,6 +25,7 @@ class TaskDateList(generics.ListCreateAPIView):
 		permissions.AllowAny
 	]
 
+	# only want to get tasks on this day
 	def get_queryset(self):
 		year = self.kwargs.get("year")
 		month = self.kwargs.get("month")
@@ -53,6 +55,8 @@ class MeetingList(generics.ListCreateAPIView):
 	permission_classes = [
 		permissions.AllowAny
 	]
+
+	#Only want to pull in the meetings within this week, and ordered
 	def get_queryset(self):
 		today = datetime.today()
 		start_date = datetime(today.year, today.month, today.day, 23, 59, 59) - timedelta(days=2)
