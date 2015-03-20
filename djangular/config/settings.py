@@ -92,3 +92,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(APP_DIR, 'static'),
 )
+
+
+import dj_database_url
+import os
+if os.getcwd() == "/app":
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
