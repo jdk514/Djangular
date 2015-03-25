@@ -29,7 +29,7 @@ controllers.controller('taskListController', ($scope, $state, $log, $http, tasks
 		#Use the current time to set the id - should be unique
 		int_date = new Date().getTime()
 		data = {'meeting' : $scope.$parent.meeting, 'date' : date}
-		$http({method: 'PUT', url: '/todo/meetings/' + int_date + '/', data:data})
+		$http({method: 'POST', url: '/todo/meetings/' + int_date + '/', data:data})
 		.success (data) =>  
 			$log.info("Added Meeting")
 		.error (data) =>
