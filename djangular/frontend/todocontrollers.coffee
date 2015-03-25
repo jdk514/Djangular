@@ -17,7 +17,7 @@ controllers.controller('taskListController', ($scope, $state, $log, $http, tasks
 		#Use the current time to set the id - should be unique
 		int_date = new Date().getTime()
 		data = {'task' : $scope.$parent.task, 'priority' : 0, 'due_date' : date, 'completed' : false}
-		$http({method: 'PUT', url: '/todo/tasks/' + int_date + '/', data:data})
+		$http({method: 'POST', url: '/todo/tasks/' + int_date + '/', data:data})
 		.success (data) =>
 			$log.info("Added Task")
 		.error (data) =>

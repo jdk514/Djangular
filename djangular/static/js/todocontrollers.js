@@ -24,7 +24,7 @@
         'completed': false
       };
       return $http({
-        method: 'PUT',
+        method: 'POST',
         url: '/todo/tasks/' + int_date + '/',
         data: data
       }).success(function(data) {
@@ -43,7 +43,7 @@
         'date': date
       };
       return $http({
-        method: 'PUT',
+        method: 'POST',
         url: '/todo/meetings/' + int_date + '/',
         data: data
       }).success(function(data) {
