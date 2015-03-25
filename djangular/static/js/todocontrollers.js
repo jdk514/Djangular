@@ -23,6 +23,8 @@
         'due_date': date,
         'completed': false
       };
+      $scope.$parent.due_date = "";
+      $scope.$parent.task = "";
       return $http({
         method: 'POST',
         url: '/todo/tasks/' + int_date + '/',
@@ -42,6 +44,8 @@
         'meeting': $scope.$parent.meeting,
         'date': date
       };
+      $scope.$parent.date = "";
+      $scope.$parent.meeting = "";
       return $http({
         method: 'POST',
         url: '/todo/meetings/' + int_date + '/',

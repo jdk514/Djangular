@@ -33,7 +33,7 @@ class TaskDateList(generics.ListCreateAPIView):
 		tasks = Task.objects.filter(due_date__day = day, due_date__month = month, due_date__year = year)
 		return tasks
 
-class TaskDetail(generics.CreateAPIView):
+class TaskDetail(generics.CreateAPIView, generics.UpdateAPIView):
 	model = Task
 	serializer_class = TaskSerializer
 	lookup_url_kwarg = 'task_pk'
